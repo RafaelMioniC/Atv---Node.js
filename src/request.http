@@ -1,0 +1,204 @@
+@baseUrl = http://localhost:3000
+
+### 01 - testar API
+GET {{baseUrl}}/
+
+### 02 - listar ordens
+GET {{baseUrl}}/ordens
+
+### 03 - criar ordem tipo 1
+POST {{baseUrl}}/ordens
+Content-Type: application/json
+
+{
+    "codigoOrdem": "OP101",
+    "codigoProduto": "PROD101",
+    "tipoProduto": 1,
+    "quantidadeProduzida": 1000,
+    "custoUnitarioBase": 50,
+    "estoqueInicial": 200
+}
+
+### 04 - criar ordem tipo 2
+POST {{baseUrl}}/ordens
+Content-Type: application/json
+
+{
+    "codigoOrdem": "OP102",
+    "codigoProduto": "PROD102",
+    "tipoProduto": 2,
+    "quantidadeProduzida": 1000,
+    "custoUnitarioBase": 50,
+    "estoqueInicial": 600
+}
+
+### 05 - criar ordem tipo 3
+POST {{baseUrl}}/ordens
+Content-Type: application/json
+
+{
+    "codigoOrdem": "OP103",
+    "codigoProduto": "PROD103",
+    "tipoProduto": 3,
+    "quantidadeProduzida": 2000,
+    "custoUnitarioBase": 100,
+    "estoqueInicial": 6000
+}
+
+### 06 - listar ordens
+GET {{baseUrl}}/ordens
+
+### 07 - buscar OP101
+GET {{baseUrl}}/ordens/OP101
+
+### 08 - buscar OP102
+GET {{baseUrl}}/ordens/OP102
+
+### 09 - filtrar por tipo
+GET {{baseUrl}}/ordens?tipoProduto=1
+
+### 10 - filtrar estoque alto
+GET {{baseUrl}}/ordens?alertaEstoque=ALTO
+
+### 11 - filtrar estoque crítico
+GET {{baseUrl}}/ordens?alertaEstoque=CRITICO
+
+### 12 - filtrar estoque normal
+GET {{baseUrl}}/ordens?alertaEstoque=NORMAL
+
+### 13 - atualizar OP101
+PUT {{baseUrl}}/ordens/OP101
+Content-Type: application/json
+
+{
+    "codigoProduto": "PROD101",
+    "tipoProduto": 2,
+    "quantidadeProduzida": 3000,
+    "custoUnitarioBase": 100,
+    "estoqueInicial": 600
+}
+
+### 14 - conferir OP101
+GET {{baseUrl}}/ordens/OP101
+
+### 15 - atualizar OP102
+PUT {{baseUrl}}/ordens/OP102
+Content-Type: application/json
+
+{
+    "codigoProduto": "PROD102",
+    "tipoProduto": 3,
+    "quantidadeProduzida": 5000,
+    "custoUnitarioBase": 200,
+    "estoqueInicial": 10000
+}
+
+### 16 - conferir OP102
+GET {{baseUrl}}/ordens/OP102
+
+### 17 - relatório
+GET {{baseUrl}}/relatorios/ordens
+
+### 18 - testar código duplicado
+POST {{baseUrl}}/ordens
+Content-Type: application/json
+
+{
+    "codigoOrdem": "OP101",
+    "codigoProduto": "PROD999",
+    "tipoProduto": 1,
+    "quantidadeProduzida": 100,
+    "custoUnitarioBase": 10,
+    "estoqueInicial": 100
+}
+
+### 19 - testar tipo inválido
+POST {{baseUrl}}/ordens
+Content-Type: application/json
+
+{
+    "codigoOrdem": "OP104",
+    "codigoProduto": "PROD104",
+    "tipoProduto": 4,
+    "quantidadeProduzida": 1000,
+    "custoUnitarioBase": 50,
+    "estoqueInicial": 500
+}
+
+### 20 - testar tipo zero
+POST {{baseUrl}}/ordens
+Content-Type: application/json
+
+{
+    "codigoOrdem": "OP105",
+    "codigoProduto": "PROD105",
+    "tipoProduto": 0,
+    "quantidadeProduzida": 1000,
+    "custoUnitarioBase": 50,
+    "estoqueInicial": 500
+}
+
+### 21 - testar campos obrigatórios
+POST {{baseUrl}}/ordens
+Content-Type: application/json
+
+{   
+    "tipoProduto": 1,
+    "codigoOrdem": "OP106"
+}
+
+### 22 - testar quantidade negativa
+POST {{baseUrl}}/ordens
+Content-Type: application/json
+
+{
+    "codigoOrdem": "OP107",
+    "codigoProduto": "PROD107",
+    "tipoProduto": 1,
+    "quantidadeProduzida": -100,
+    "custoUnitarioBase": 50,
+    "estoqueInicial": 500
+}
+
+### 23 - testar custo negativo
+POST {{baseUrl}}/ordens
+Content-Type: application/json
+
+{
+    "codigoOrdem": "OP108",
+    "codigoProduto": "PROD108",
+    "tipoProduto": 1,
+    "quantidadeProduzida": 1000,
+    "custoUnitarioBase": -50,
+    "estoqueInicial": 500
+}
+
+### 24 - buscar ordem inexistente
+GET {{baseUrl}}/ordens/NAOEXISTE
+
+### 25 - atualizar ordem inexistente
+PUT {{baseUrl}}/ordens/NAOEXISTE
+Content-Type: application/json
+
+{
+    "codigoProduto": "PROD999",
+    "tipoProduto": 1,
+    "quantidadeProduzida": 100,
+    "custoUnitarioBase": 50,
+    "estoqueInicial": 100
+}
+
+### 26 - excluir OP103
+DELETE {{baseUrl}}/ordens/OP103
+
+### 27 - conferir exclusão
+GET {{baseUrl}}/ordens/OP103
+
+### 28 - excluir OP103 novamente
+DELETE {{baseUrl}}/ordens/OP103
+
+### 29 - listagem final
+GET {{baseUrl}}/ordens
+
+### 30 - relatório final
+GET {{baseUrl}}/relatorios/ordens
